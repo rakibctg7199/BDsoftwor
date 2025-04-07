@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <title>EasyLoanBD - Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Welcome to EasyLoanBD</h2>
+    <p id="welcomeUser"></p>
+    <button onclick="location.href='loan.html'">Apply for Loan</button>
+    <button onclick="logout()">Logout</button>
+  </div>
+  <script>
+    const user = JSON.parse(localStorage.getItem('loggedInUser'));
+    if (!user) window.location.href = 'signin.html';
+    document.getElementById('welcomeUser').innerText = `Hello, ${user.username}`;
+    function logout() {
+      localStorage.removeItem('loggedInUser');
+      window.location.href = 'signin.html';
+    }
+  </script>
+</body>
+</html>

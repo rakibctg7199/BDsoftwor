@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <title>EasyLoanBD - Loan</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Loan Application</h2>
+    <button onclick="showDepositForm()">Apply Now</button>
+
+    <div id="depositForm" style="display:none;">
+      <h3>Send Money to 01979448661</h3>
+      <label>Payment Method:
+        <select id="paymentMethod">
+          <option>bKash</option>
+          <option>Nagad</option>
+          <option>Rocket</option>
+        </select>
+      </label><br><br>
+      <input type="text" id="trxID" placeholder="Enter TRX ID">
+      <button onclick="submitDeposit()">Submit</button>
+    </div>
+    <p id="status"></p>
+  </div>
+  <script>
+    const user = JSON.parse(localStorage.getItem('loggedInUser'));
+    if (!user) window.location.href = 'signin.html';
+    function showDepositForm() {
+      document.getElementById('depositForm').style.display = 'block';
+    }
+    function submitDeposit() {
+      const trxID = document.getElementById('trxID').value.trim();
+      const method = document.getElementById('paymentMethod').value;
+      if (trxID.length < 6) {
+        alert("TRX ID ঠিকভাবে দিন");
+        return;
+      }
+      document.getElementById('status').innerText = `Payment (${method}) received. TRX ID: ${trxID}`;
+    }
+  </script>
+</body>
+</html>
